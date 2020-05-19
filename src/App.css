@@ -1,38 +1,99 @@
-.App {
-  text-align: center;
+.App-wrapper {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  grid-template-areas: 
+    "hd hd hd   hd   hd   hd   hd   hd   hd"
+    "sd sd main main main main main main main";
+  max-width: 1064px;
+  padding: 0 20px;
+  margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
+.App-content {
+  grid-area: main;
+}
+
+
+/* PRELOADER */
+.App-preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 100;
+}
+
+.App-preloader-icon {
+  align-self: center;
+  flex: 0 0 auto;
+}
+
+
+/* PAGINATION */
+.App-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.App-pagination-item {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.App-pagination-item:hover {
+  border-color: #999999;
+}
+
+.App-pagination-item:disabled {
+  opacity: 0.5;
+  cursor: default;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App-pagination-item--prev:after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-left: 2px solid #91d5fc;
+  border-top: 2px solid #91d5fc;
+  transform: rotateZ(-45deg) translate(2px, 1px);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App-pagination-item--next:after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #91d5fc;
+  border-top: 2px solid #91d5fc;
+  transform: rotateZ(45deg) translate(-1px, 0);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-pagination-item--selected {
+  background-color: #91d5fc;
+  border-color: #7eccfa;
+  cursor: default;
+  pointer-events: none;
 }

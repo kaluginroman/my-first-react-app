@@ -1,0 +1,42 @@
+.App-header {
+    grid-area: hd;
+    height: 80px;
+    padding: 10px;
+    background-color: #7deafd44;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.App-logo {
+    height: 100%;
+}
+
+.App-header-user__login-btn {
+    color: #000000;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.App-header-user__login-btn:hover {
+    color: #424242;
+}
+
+.header-user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.header-user__login {
+    text-transform: uppercase;
+    background-color: #8fd7e0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}

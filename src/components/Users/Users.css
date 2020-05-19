@@ -1,0 +1,63 @@
+.App-users {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    min-height: 240px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.user-card__img {
+    display: flex;
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.user-card__title {
+    font-weight: 600;
+    margin: 0 0 10px;
+}
+
+.user-card__status {
+    margin: 0 0 20px;
+    font-weight: 300;
+    color: #797979;
+    font-size: 14px;
+}
+
+.user-card__location {
+    margin: 0 0 10px;
+}
+
+.user-card__city {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #000;
+}
+
+.user-card__country {
+    font-size: 14px;
+    color: #797979;
+}
+
+.user-card__btn {
+    width: 100%;
+    padding: 10px 20px;
+    margin-top: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #fff;
+}

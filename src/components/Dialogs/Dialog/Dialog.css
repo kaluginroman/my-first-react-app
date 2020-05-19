@@ -1,0 +1,20 @@
+.dialog-user {
+    padding: 10px 20px;
+}
+
+.dialog-user__link {
+    cursor: pointer;
+    transition: 0.3s;
+    color: #000;
+    text-decoration: none;
+}
+
+.dialog-user:hover {
+    color: #5e5e5e;
+}
+
+.dialog-user.active {
+    text-decoration: underline;
+    font-weight: 600;
+    transform: translateX(10px);
+}

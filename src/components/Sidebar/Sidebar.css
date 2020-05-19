@@ -1,0 +1,29 @@
+.App-sidebar {
+    grid-area: sd;
+    height: calc(100vh - 120px);
+    background-color: #7deafd44;
+    position: sticky;
+    top: 0px;
+}
+  
+.App-nav {
+    list-style: none;
+    padding: 0;
+}
+  
+.App-link {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    transition: 0.3s;
+    padding: 0 20px 20px;
+}
+
+.App-link.active {
+    font-weight: 600;
+    transform: translateX(10px);
+}
+  
+.App-link:hover {
+    color: #5e5e5e;
+}
