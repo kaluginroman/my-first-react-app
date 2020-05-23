@@ -1,51 +1,33 @@
-// import React, { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import './ProfileInfo.css'
 import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
 import userPhoto from '../../../../src/assets/img/userPhoto.png';
+import ProfileDataForm from "./ProfileDataForm";
 
 const Contacts = ({contactTitle, contactValue}) => {
   return (
-    <p><span style={{minWidth: "100px", display: "inline-block"}}>{contactTitle}</span>: {contactValue ? contactValue : "---"}</p>
+    <div><span style={{minWidth: "100px", display: "inline-block"}}>{contactTitle}</span>: {contactValue ? contactValue : "---"}</div>
   )
 };
 
 const ProfileData = (props) => {
   return (
     <div>
-      <p><strong>Looking for a job: </strong>{props.profile.lookingForAJob ? "yes" : "no"}</p>
-      {props.profile.lookingForAJob && <p><strong>My professional skills: </strong>{props.profile.lookingForAJobDescription}</p>}
-      {props.profile.aboutMe && <p><strong>About me: </strong>{props.profile.aboutMe}</p>}
+      {props.isOwner && <button onClick={props.goToEditMode}>Edit</button> }
+      <div><strong>Full name: </strong>{props.profile.fullName}</div>
+      <div><strong>Looking for a job: </strong>{props.profile.lookingForAJob ? "yes" : "no"}</div>
+      <div><strong>My professional skills: </strong>{props.profile.lookingForAJobDescription}</div>
+      {props.profile.aboutMe && <div><strong>About me: </strong>{props.profile.aboutMe}</div>}
       {props.profile.contacts && 
-        <p>
+        <div>
           <strong>Contacts: </strong>
           <span>
             {Object.keys(props.profile.contacts).map(item => {
               return <Contacts key={item} contactTitle={item} contactValue={props.profile.contacts[item]} />
             })}
           </span>
-        </p>
-      }
-    </div>
-  )
-}
-
-const ProfileDataForm = (props) => {
-  return (
-    <div>
-      <p><strong>Looking for a job: </strong>{props.profile.lookingForAJob ? "yes" : "no"}</p>
-      {props.profile.lookingForAJob && <p><strong>My professional skills: </strong>{props.profile.lookingForAJobDescription}</p>}
-      {props.profile.aboutMe && <p><strong>About me: </strong>{props.profile.aboutMe}</p>}
-      {props.profile.contacts && 
-        <p>
-          <strong>Contacts: </strong>
-          <span>
-            {Object.keys(props.profile.contacts).map(item => {
-              return <Contacts key={item} contactTitle={item} contactValue={props.profile.contacts[item]} />
-            })}
-          </span>
-        </p>
+        </div>
       }
     </div>
   )
@@ -53,13 +35,20 @@ const ProfileDataForm = (props) => {
 
 const ProfileInfo = (props) => {
 
-  // const [editMode, setEditMode] = useState(false);
-  const editMode = false;
+  const {saveProfile} = props;
+
+  const [editMode, setEditMode] = useState(false);
 
   const onMainPhotoSelected = (e) => {
     if (e.target.files.length) {
       props.savePhoto(e.target.files[0])
     } 
+  };
+
+  let onSubmit = (formData) => {
+    saveProfile(formData).then(() => {
+      setEditMode(false)
+    })
   };
 
   if (!props.profile) {
@@ -76,7 +65,13 @@ const ProfileInfo = (props) => {
           <span className="profile-name">{props.profile.fullName}</span>
           <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
         </div>
-        {editMode ? <ProfileDataForm profile={props.profile}/> : <ProfileData profile={props.profile}/>}
+        {editMode
+          ? <ProfileDataForm profile={props.profile}
+                             onSubmit={onSubmit}
+                             initialValues={props.profile}/>
+          : <ProfileData profile={props.profile}
+                         isOwner={props.isOwner}
+                         goToEditMode={() => {setEditMode(true)}}/>}
       </div>
     </div>
   )
