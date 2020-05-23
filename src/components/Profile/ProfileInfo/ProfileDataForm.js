@@ -3,7 +3,7 @@ import {Input, Textarea} from "../../common/FormsControls/FormsControls";
 import {Field, reduxForm} from "redux-form";
 
 const ProfileDataForm = ({profile, handleSubmit, error}) => {
-  console.log('Error in form', error);
+
   return (
     <form onSubmit={handleSubmit}>
       {error && <span className="auth__error">{error}</span>}
