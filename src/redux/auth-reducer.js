@@ -50,7 +50,7 @@ export const login = (email, password, rememberMe, captcha) => (dispatch) => {
   authApi.login(email, password, rememberMe, captcha)
     .then(response => {
       if (response.data.resultCode === 0) {
-        dispatch(getAuthUserData())
+        dispatch(getAuthUserData());
       } else {
         if (response.data.resultCode === 10) {
           dispatch(getCaptchaUrl());

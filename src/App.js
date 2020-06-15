@@ -1,7 +1,7 @@
 import React from 'react';
 import {compose} from "redux";
 import {connect, Provider} from "react-redux";
-import {HashRouter, Route, withRouter} from 'react-router-dom';
+import {HashRouter, Redirect, Route, withRouter} from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Preloader from "./components/common/Preloader/Preloader";
@@ -17,8 +17,17 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 
 class App extends React.Component {
 
+  catchAllError = (error) => {
+    alert(error);
+  };
+
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("unhandledrejection", this.catchAllError)
+  };
+
+  componentWillMount() {
+    window.removeEventListener("unhandledrejection", this.catchAllError)
   }
 
   render() {
@@ -33,10 +42,12 @@ class App extends React.Component {
         <HeaderContainer/>
         <Sidebar/>
         <div className="App-content">
+          <Route exact path="/" render={() => <Redirect to={"/profile"}/>}/>
           <Route path="/profile/:userId?" render={WithSuspenseComponent(ProfileContainer)}/>
           <Route path="/dialogs" render={WithSuspenseComponent(DialogsContainer)}/>
           <Route path="/users" render={() => <UsersContainer/>}/>
           <Route path="/login" render={() => <Login/>}/>
+          <Route path="*" render={() => <div>404 not found</div>}/>
         </div>
       </div>
     );
