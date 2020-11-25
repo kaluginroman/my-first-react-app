@@ -4,7 +4,7 @@ import './Post.css'
 const MyPosts = (props) => {
     return (
         <div className="post">
-            <img className="post-img" src="https://www.evopia.com/wp-content/uploads/2018/03/avatar-generic-male.png" alt="avatar"/>
+            <img className="post-img" src="https://i.pinimg.com/originals/3b/7d/6f/3b7d6f60e2d450b899c322266fc6edfd.png" alt="avatar"/>
             <span className="post-text">
                 {props.message ? props.message : ''}
             </span>

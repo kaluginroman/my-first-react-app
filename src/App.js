@@ -1,7 +1,7 @@
 import React from 'react';
 import {compose} from "redux";
 import {connect, Provider} from "react-redux";
-import {HashRouter, Redirect, Route, withRouter} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, withRouter} from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Preloader from "./components/common/Preloader/Preloader";
@@ -18,7 +18,7 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 class App extends React.Component {
 
   catchAllError = (error) => {
-    alert(error);
+    console.log("Error: ", error);
   };
 
   componentDidMount() {
@@ -45,9 +45,8 @@ class App extends React.Component {
           <Route exact path="/" render={() => <Redirect to={"/profile"}/>}/>
           <Route path="/profile/:userId?" render={WithSuspenseComponent(ProfileContainer)}/>
           <Route path="/dialogs" render={WithSuspenseComponent(DialogsContainer)}/>
-          <Route path="/users" render={() => <UsersContainer/>}/>
+          <Route path="/users" render={() => <UsersContainer pageTitle={"Users Page"}/>}/>
           <Route path="/login" render={() => <Login/>}/>
-          <Route path="*" render={() => <div>404 not found</div>}/>
         </div>
       </div>
     );
@@ -65,11 +64,11 @@ const AppContainer = compose(withRouter,
 
 const MainApp = (props) => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <AppContainer/>
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
